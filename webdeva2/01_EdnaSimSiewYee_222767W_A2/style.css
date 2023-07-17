@@ -1,0 +1,194 @@
+body{
+    margin: 0;
+    background-color: rgb(212, 212, 212);
+}
+#pageContainer{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+div section {
+    /*sections that are inside of a div, aka the main pages*/
+    /* width:80vw; */
+    height: fit-content;
+}
+header{
+    text-align: center;
+    font-size: 5rem;
+    background-color: rgb(218, 218, 218);
+}
+nav ul{
+    background-color: rgb(133, 145, 161);
+    text-align: center;
+    margin-top: 0;
+}
+nav ul li{
+    /* make room for padding */
+    display:inline-block; 
+    padding: 1rem;
+}
+nav ul li:hover{
+    text-transform: uppercase;
+    color:rgb(213, 188, 85);
+}
+#BackToTop{
+    background-color: rgb(133, 145, 161);
+    position: fixed;
+    bottom: 0; /*stick to bottom*/
+    padding: 0.5em;
+    border-radius: 5px 10px 0 0;
+}
+img{
+    max-width: 100%;
+}
+.spanTop{
+    display: inline-block;
+    vertical-align: top;
+}
+.tooltip{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+.tooltip_Text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+    background-color: rgba(4, 4, 4, 0.5);
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    bottom: 130%;
+    left: 0;
+  }
+  
+.tooltip:hover .tooltip_Text {
+    visibility: visible;
+}
+
+#pigeons{
+    background-color: aquamarine;
+}
+#pigeonCharacter{
+    /* Make a circle */
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    background-color: brown;
+}
+
+#perefalc{
+    background-color: bisque;
+}
+#FalcDiagram{
+    text-align: center;
+    vertical-align: top;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: coral;
+
+}
+.FalcLeft{
+    grid-column: 1/2;
+    grid-row: 1; /* make them overlap, since they will be appearing one at a time anyway */
+}
+.FalcRight{
+    grid-column: 3/4;
+    grid-row: 1;
+}
+#FalcDiagram div{
+    grid-column: 2/3;
+}
+/* graph to display animal speeds, with reference from https://youtu.be/8ULg-7SvP2o */
+#speedGraph{
+    background-color: rgb(155, 223, 223);
+    width: fit-content;
+    height: 50%;
+    display:flex; /*prevents graph from morphing whats below it*/
+    margin: auto; /*center*/
+}
+#speedGraph div h3{
+    font-weight: 1; /*less bold*/
+}
+.bar{ /* bar background/container */
+    height: 1em;
+    /* background-color: rgb(180, 180, 180); */
+    border-radius: 5px;
+}
+.bar:nth-of-type(1){
+    width: 50vw;
+}
+.bar:nth-of-type(2){
+    width: 20.3vw;
+}
+.bar:nth-of-type(3){
+    width: 20.6vw;
+}
+.bar div{ /* actual bar that should move */
+    height: 1em;
+    width: 0;
+    background-color: rgb(255, 72, 11);
+    border-radius: 5px;
+    animation: barAnim 2s linear forwards;
+}
+@keyframes barAnim{
+    100%{width: 100%;} /*at end of anim, bar-div should take up 100% of the container width*/
+    to{background-color:green;}
+}
+.bar div span{ /*container for the animal image*/
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    background-color: aliceblue;
+    float:right;
+    display: flex;
+    align-items: center;
+}
+
+#inmedia{
+    background-color: darkorchid;
+}
+#hamMenu{
+    display:none;
+}
+footer{
+    border-top:solid 1px rgb(43, 119, 226);
+    margin-top: 2em;
+}
+
+/*for js showing and hiding nav menu*/
+/* Referenced from: https://codepen.io/erikterwan/pen/EVzeRP?editors=1100 */
+.toggleDisplay{
+    transform: translate(0%);
+    /*cubic bezier: variable speed (start, ?, end, ?)*/
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+.toggleCloseDisplay{
+    transform: translate(-100%); /*move offscreen*/
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+.togglehide{
+    display: none;
+}
+
+@media screen and (max-width:800px){
+    #pageContainer{
+        padding: 0;
+    }
+    nav ul{
+        transform-origin: 0%;
+        position: absolute;
+        margin:0;
+        width:fit-content;
+    }
+    nav ul li{
+        display:block;
+    }
+    div div {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    #hamMenu{
+        display: block;
+        position: relative;
+    } 
+}

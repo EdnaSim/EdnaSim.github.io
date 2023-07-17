@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        Cool bird facts
+    </header>
+    <nav>
+        <button id="hamMenu">Menu</button>
+        <ul>
+            <li>History of pigeons</li>
+            <li>Peregrine Falcons</li>
+            <li>Birds in media</li>
+        </ul>
+    </nav>
+    <div id="BackToTop">
+        Back to Top
+    </div>
+    <div id="pageContainer">
+        <section id="pigeons">
+            <h1>Introduction to the Rock Dove</h1>
+            <p>
+                The domestic pigeons that share their homes with us in cities are derived from the wild Rock Dove. 
+                They have a long and remarkable history with us, since the day Pigeons were domesticated, around 4000-5000 years ago<sup>[1]</sup>.
+            </p>
+            <p>
+                Click on various parts of the image to learn more
+            </p>
+            <div>
+                <!-- img map of pigeon, with spans that change as the user clicks on the map -->
+                <img src="Images/pigeon.png" alt="Pigeon" usemap="#pigeonMap">
+                <map name="pigeonMap">
+                    <!-- When parts of map clicked, run the function to show the info -->
+                    <area alt="Eye" title="Eye" href="#" coords="123,57,8" shape="circle" onclick="showPigeonInfo(0)">
+                    <area alt="Ear" title="Ear" href="#" coords="100,62,11" shape="circle" onclick="showPigeonInfo(1)">
+                    <area alt="Brain" title="Brain" href="#" coords="68,45,93,28,113,26,135,28,150,37,161,49" shape="poly" onclick="showPigeonInfo(2)">
+                </map>
+
+                <span class="spanTop pigeoninfo">
+                    Eye: 
+                </span>
+                <span class="spanTop pigeoninfo">
+                    Ear: 
+                </span>
+                <span class="spanTop pigeoninfo">
+                    Brain: 
+                </span>
+            </div>
+            
+            <h1>Pigeons as messengers</h1>
+            <p>
+                Pigeon War Heros
+                (that pigeon that delivered a crucial letter to soldiers despite getting shot)
+            </p>
+            <h1>Project Pigeon</h1>
+            <p>
+                AKA Project Orcon (organic control) 
+                (homing missiles controlled by pigeons, minigame on following a target)
+                Project Pigeons: Modern day
+                (the one about finding people lost at sea)
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Ro068H6w8Vg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+            </p>
+            <div id="pigeonGame">
+                <div id="pigeonCharacter"></div>
+            </div>
+            <footer>
+                Sources:
+                <ol>
+                    <li>
+                        <a class="tooltip" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4854524/" target="_blank" rel="noopener">Domestic Pigeons - Michael D. Shapiro & Eric T. Domyan
+                        <span class="tooltip_Text">www.ncbi.nlm.nih.gov/pmc/articles/PMC4854524</span></a>
+                    </li>
+                </ol>
+            </footer>
+        </section>
+
+        <section id="perefalc">
+            <h1>Anatomy of SPEED</h1>
+            <div id="FalcDiagram">
+                <!-- text on both sides of imagemap, 
+                when one is clicked, the other text on the same side needs to be hidden,
+                text can exist on both sides of the image at the same time-->
+                <span class="FalcLeft">
+                    <h2>Baffle / Tubercle</h2>
+                </span>
+                <span class="FalcLeft">
+                    <h2>Tomial Tooth</h2>
+                </span>
+                <span class="FalcRight">
+                    <h2>Eye</h2>
+                </span>
+                <span class="FalcRight">
+                    <h2>Heart and Lungs</h2>
+                </span>
+                
+                <div>
+                    <img src="Images/FalcDiagram.png" usemap="#falcdiag">
+                    <map name="falcdiag" id="falcdiag">
+                        <area alt="Nose" title="Nose" href="#" coords="10,31,170,70" shape="rect" onclick="showFalcInfo(0)">
+                        <area alt="Beak" title="Beak" href="#" coords="80,239,220,281" shape="rect" onclick="showFalcInfo(1)">
+                        <area alt="Eye" title="Eye" href="#" coords="440,70,500,110" shape="rect" onclick="showFalcInfo(2)">
+                        <area alt="Body" title="Body" href="#" coords="241,400,400,441" shape="rect" onclick="showFalcInfo(3)">
+                    </map>
+                </div>
+                
+            </div>
+            <h1>Comparison</h1>
+            <div id="speedGraph">
+                <div>
+                    <button onclick="RestartAnim()">Restart</button>
+
+                    <h3>Peregrine Falcon</h3>
+                    <div class="bar">
+                        <div class="barFalc">
+                            <span>img</span>
+                        </div>
+                    </div>
+
+                    <h3>Cheetah</h3>
+                    <div class="bar">
+                        <div class="barCheetah">
+                            <span>img</span>
+                        </div>
+                    </div>
+
+                    <h3>Black Marlin</h3>
+                    <div class="bar">
+                        <div class="barMarlin">
+                            <span>img</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <p>
+                (explain the dive bomb)
+                (show some anatomy)
+                (inspiration for jet engines)
+            </p>
+        </section>
+
+        <section id="inmedia">
+            <h1>Bald Eagle</h1>
+            <p>
+
+            </p>
+            <h1>Common Loon</h1>
+        </section>
+
+    </div>
+</body>
+</html>
