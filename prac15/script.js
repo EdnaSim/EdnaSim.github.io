@@ -1,5 +1,6 @@
 // Function to enter fullscreen mode
 function enterFullscreen() {
+    console.log("Fullscreen");
     if (document.documentElement.requestFullscreen) {
     document.documentElement.requestFullscreen();
     } else if (document.documentElement.mozRequestFullScreen) { // Firefox
