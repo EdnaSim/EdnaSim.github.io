@@ -18,6 +18,28 @@ for(let area of areas) {
 };
 const pigeonInfo = document.querySelectorAll(".pigeoninfo");
 const falcInfo = document.querySelectorAll(".FalcLeft, .FalcRight");
+const speedgraph = document.querySelectorAll("#speedGraph div")[1];
+speedgraph.style.display = "none";
+
+//form
+function hideForm(){
+    document.getElementById("speedGuessForm").style.display = "none";
+    speedgraph.style.display = "inline";
+    var p = document.querySelector("#speedGraph div p");
+    var n =document.querySelector(".form form input").value;
+    if (n >= 250 && n <= 300 ){
+        p.innerHTML = "<b>Close guess! It's actually faster!</b>"
+    }
+    else if (n > 300 && n < 390){
+        p.innerHTML = "<b>Great guess!</b>";
+    }
+    else if (n == 390){
+        p.innerHTML ="<b>Right on!</b>";
+    }
+    else if (n > 390 && b < 450){
+        p.innerHTML = "<b>Close guess! It's actually slower!</b>"
+    }
+}
 
 hidepages(pigeonInfo);
 hidepages(falcInfo);
@@ -73,14 +95,25 @@ function toggleMenus(){ /*open and close menu*/
     menuItemsList.classList.toggle("toggleDisplay");
 }
 function RestartAnim(){ 
+    document.getElementById("speedGuessForm").style.display = "inline";
+    speedgraph.style.display = "none";
     //cloning method adapted from: https://stackoverflow.com/questions/58170892/javascript-add-remove-animation-class-only-animates-once
-    let bars = document.querySelectorAll(".bar div");
-    for (let b of bars){
-        //for each bar, clone it
-        let newb = b.cloneNode(true);
-        //replace the old one, which resets the animation
-        b.replaceWith(newb);
-    }
+    // let bars = document.querySelectorAll(".bar div");
+    // for (let b of bars){
+    //     //for each bar, clone it
+    //     let newb = b.cloneNode(true);
+    //     //if alr have, toggle off, so that when toggled again, anim immediately plays
+    //     if (newb.classList.contains("barAnim"))
+    //         newb.classList.toggle("barAnim");
+    //     newb.classList.toggle("barAnim");
+    //     //replace the old one, which resets the animation
+    //     b.replaceWith(newb);
+    // }
+}
+
+function playAudio(id){
+    var a = document.getElementById(id);
+    a.play();
 }
 
 //resize coords of imagemap
@@ -100,7 +133,7 @@ function ResizeMap(map, width){
     for (let i=0; i < len; i++){ //i - coords of an area
         let cLen = coords[i].length;
         for (let j=0; j < cLen; j++){ //j - each (x1, y1, x2, y2) of the coord[i]
-            //reset coords back to the "original"
+            //reset coords back to the "original" so changes dont accumalate
             coords[i][j] /= previousWidth;
             //then change the coords based on newWidth
             coords[i][j] *= newWidth;
@@ -115,8 +148,23 @@ window.addEventListener("resize", function() {ResizeMap(document.querySelector("
 
 //listen for click
 page1btn.addEventListener("click", function () {showpage(allpages, 1)});
-page2btn.addEventListener("click", function () {showpage(allpages, 2)});
+page2btn.addEventListener("click", function () {showpage(allpages, 2), ResizeMap(document.querySelector("#falcdiag"), 693);});
 page3btn.addEventListener("click", function () {showpage(allpages, 3)});
 hamBtn.addEventListener("click",toggleMenus);
 backtotopBtn.addEventListener("click", backtotop);
+
+document.querySelector(".barFalc").addEventListener("animationend", function(){
+    //bar moving anims end at the same time, so just call one of them
+    //to change th <p> text once anim ends
+    var diff = 390 - document.querySelector(".form form input").value;
+    //convert neg to pos
+    if (diff < 0)
+        diff = diff * -1;
+    if (diff != 0)
+        var countDiffHTML = "Your guess was " + diff + " off!" ;
+    else //guess was perfect, no need show difference
+        var countDiffHTML= "";
+    //change html to show the stuff
+    document.querySelector("#speedGraph div p").innerHTML = countDiffHTML + "<br><b>The falcon tops out at 390 km/h!</b>";
+})
     

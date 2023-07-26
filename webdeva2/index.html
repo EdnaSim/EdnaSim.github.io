@@ -20,9 +20,9 @@
             <li>Birds in media</li>
         </ul>
     </nav>
-    <div id="BackToTop">
-        Back to Top
-    </div>
+
+    <button id="BackToTop">Back to top</button>
+
     <div id="pageContainer">
         <section id="pigeons">
             <h1>Introduction to the Rock Dove</h1>
@@ -71,13 +71,21 @@
                 <div id="pigeonCharacter"></div>
             </div>
             <footer>
-                Sources:
-                <ol>
-                    <li>
-                        <a class="tooltip" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4854524/" target="_blank" rel="noopener">Domestic Pigeons - Michael D. Shapiro & Eric T. Domyan
-                        <span class="tooltip_Text">www.ncbi.nlm.nih.gov/pmc/articles/PMC4854524</span></a>
-                    </li>
-                </ol>
+                <div>
+                    Sources:
+                    <ol>
+                        <li>
+                            <a class="tooltip" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4854524/" target="_blank" rel="noopener">Domestic Pigeons - Michael D. Shapiro & Eric T. Domyan
+                            <span class="tooltip_Text">www.ncbi.nlm.nih.gov/pmc/articles/PMC4854524</span></a>
+                        </li>
+                    </ol>
+                </div>
+                <div>
+                    Media Sources:
+                    <ol>
+                        <li></li>
+                    </ol>
+                </div>
             </footer>
         </section>
 
@@ -89,6 +97,9 @@
                 text can exist on both sides of the image at the same time-->
                 <span class="FalcLeft">
                     <h2>Baffle / Tubercle</h2>
+                    <p>
+                        Inspiration for jet engines
+                    </p>
                 </span>
                 <span class="FalcLeft">
                     <h2>Tomial Tooth</h2>
@@ -99,7 +110,6 @@
                 <span class="FalcRight">
                     <h2>Heart and Lungs</h2>
                 </span>
-                
                 <div>
                     <img src="Images/FalcDiagram.png" usemap="#falcdiag">
                     <map name="falcdiag" id="falcdiag">
@@ -113,13 +123,21 @@
             </div>
             <h1>Comparison</h1>
             <div id="speedGraph">
+                <!-- ask user to guess the speed of the falcon before showing them the graph -->
+                <div class="form" id ="speedGuessForm">
+                    <form action="#" onsubmit="return false">
+                        <label for="guess">Guess the speed of a Peregrine Falcon!</label>
+                        <input name="guess" id="guess" value="0" type="number"> <span>km/h</span>
+                    </form>
+                    <button onclick="hideForm()">Guess!</button>
+                </div>
                 <div>
                     <button onclick="RestartAnim()">Restart</button>
-
+                    <p><b>Let's see...</b></p> <!--after guessing speed-->
                     <h3>Peregrine Falcon</h3>
                     <div class="bar">
                         <div class="barFalc">
-                            <span>img</span>
+                            <span><img src="Images/FalcIcon.png"></span>
                         </div>
                     </div>
 
@@ -144,14 +162,78 @@
                 (show some anatomy)
                 (inspiration for jet engines)
             </p>
+            <footer>
+                <div>
+                    Sources:
+                    <ol>
+                        <li>
+                            
+                        </li>
+                    </ol>
+                </div>
+                <div>
+                    Media Sources:
+                    <ol>
+                        <li>
+                            <a class="tooltip" href="https://www.bowc.co.uk/owl-infopages/peregrine-falcon" target="_blank" rel="noopener">
+                                Peregrine Falcon | EncyclOWLpedia | Baytree Owl and Wildlife Centre
+                                <span class="tooltip_Text">www.bowc.co.uk/owl-infopages/peregrine-falcon</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://www.iconfinder.com/icons/2058520/bird_duck_eagle_hawk_peregrine_falcon_prey_icon" target="_blank" rel="noopener">
+                                Peregrine Falcon Icon
+                                <span class="tooltip_Text">https://www.iconfinder.com/icons/......</span>
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+            </footer>
         </section>
 
         <section id="inmedia">
+            <audio id="eagle">
+                <source src="Audio/BaldEagleCall.ogg" type="audio/ogg">
+                Audio file unsupported (ogg)
+            </audio>
+            <audio id="redtailedhawk"><source src="Audio/RedTailedHawk.ogg" type="audio/ogg">
+                Audio file unsupported (ogg)
+            </audio>
             <h1>Bald Eagle</h1>
-            <p>
-
-            </p>
+            Have you heard this call? 
+            <button class="roundButton" onclick="playAudio('redtailedhawk')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <br>This is actually the call of the Red Tailed Hawk.
+            <br>This is what the Bald Eagle actually sounds like: 
+            <button class="roundButton" onclick="playAudio('eagle')"><img class="soundBtn" src="Images/soundBtn.png"></button>
             <h1>Common Loon</h1>
+
+            <footer>
+                <div>
+                    Sources:
+                    <ol>
+                        <li>
+                            
+                        </li>
+                    </ol>
+                </div>
+                <div>
+                    Media Sources:
+                    <ol>
+                        <li>
+                            <a class="tooltip" href="https://youtu.be/9RArGl2vkGI" target="_blank" rel="noopener">
+                                Call of a Bald Eagle - Tristan Findley (Youtube)
+                                <span class="tooltip_Text">https://youtu.be/9RArGl2vkGI</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://youtu.be/WSGFatM1ktU" target="_blank" rel="noopener">
+                                Cinematic Eagle Cry Sound Effect - SoundEffectsFactory (Youtube)
+                                <span class="tooltip_Text">https://youtu.be/WSGFatM1ktU</span>
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+            </footer>
         </section>
 
     </div>

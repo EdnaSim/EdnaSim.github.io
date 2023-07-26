@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-color: rgb(212, 212, 212);
+    font-family: Lucida ,Monaco, Courier, monospace;
 }
 #pageContainer{
     padding-left: 10%;
@@ -35,12 +36,11 @@ nav ul li:hover{
     background-color: rgb(133, 145, 161);
     position: fixed;
     bottom: 0; /*stick to bottom*/
-    padding: 0.5em;
-    /* border-raadius goes clockwise */
+    /* border-radius goes clockwise */
     border-radius: 5px 10px 0 0;
     box-shadow: 5px 5px grey;
 }
-#BackToTop:hover{
+#BackToTop:hover, button:hover{
     text-transform: uppercase;
 }
 #BackToTop:active{
@@ -50,6 +50,8 @@ nav ul li:hover{
 }
 img{
     max-width: 100%;
+    /* remove the gap below images */
+    vertical-align: middle;
 }
 .spanTop{
     display: inline-block;
@@ -58,14 +60,13 @@ img{
 .tooltip{
     position: relative;
     display: inline-block;
-    text-align: center;
 }
 .tooltip_Text {
     visibility: hidden;
     position: absolute;
     z-index: 1;
     color: rgb(255, 255, 255);
-    background-color: rgba(4, 4, 4, 0.5);
+    background-color: rgba(4, 4, 4, 0.7);
     border-radius: 10px;
     padding: 10px 15px 10px 15px;
     bottom: 130%;
@@ -76,9 +77,9 @@ img{
     visibility: visible;
 }
 
-#pigeons{
+/* #pigeons{
     background-color: aquamarine;
-}
+} */
 #pigeonCharacter{
     /* Make a circle */
     height: 1em;
@@ -87,43 +88,66 @@ img{
     background-color: brown;
 }
 
-#perefalc{
+/* #perefalc{
     background-color: bisque;
-}
+} */
 #FalcDiagram{
     text-align: center;
     vertical-align: top;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    background-color: coral;
-
+    /* background-color: coral; */
+    position: relative;
 }
 .FalcLeft{
+    animation: slideLeft 0.5s forwards;
+    position: absolute;
+    background-color: rgb(199, 172, 105);
+    z-index: -1;
+    left: 100%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 10px 10px 10px 10px;
     grid-column: 1/2;
     grid-row: 1; /* make them overlap, since they will be appearing one at a time anyway */
 }
 .FalcRight{
+    animation: slideRight 0.5s forwards;
+    position: absolute;
+    background-color: rgb(199, 172, 105);
+    z-index: -1;
+    width: 100%;
+    right:100%;
+    border: 1px solid black;
+    border-radius: 10px 10px 10px 10px;
     grid-column: 3/4;
     grid-row: 1;
+}
+@keyframes slideLeft {
+    100% { left: 0; }
+}
+@keyframes slideRight {
+    100% { right: 0; }
 }
 #FalcDiagram div{
     grid-column: 2/3;
 }
 /* graph to display animal speeds, with reference from https://youtu.be/8ULg-7SvP2o */
 #speedGraph{
-    background-color: rgb(155, 223, 223);
-    width: fit-content;
+    background-color: bisque;
+    border-radius: 5px 5px 5px 5px;
+    padding: 1em;
+    text-align: center;
     height: 50%;
     display:flex; /*prevents graph from morphing whats below it*/
-    margin: auto; /*center*/
+    margin: auto; /*center self*/
+    justify-content: center; /*center content*/
 }
 #speedGraph div h3{
     font-weight: 1; /*less bold*/
 }
 .bar{ /* bar background/container */
     height: 1em;
-    /* background-color: rgb(180, 180, 180); */
-    border-radius: 5px;
 }
 .bar:nth-of-type(1){
     width: 50vw;
@@ -141,6 +165,9 @@ img{
     border-radius: 5px;
     animation: barAnim 2s linear forwards;
 }
+.barAnim{
+    animation: barAnim 2s linear forwards;
+}
 @keyframes barAnim{
     100%{width: 100%;} /*at end of anim, bar-div should take up 100% of the container width*/
     to{background-color:green;}
@@ -148,22 +175,73 @@ img{
 .bar div span{ /*container for the animal image*/
     height: 1.5em;
     width: 1.5em;
-    border-radius: 50%;
-    background-color: aliceblue;
+    border-radius: 50%; /*make it a circle*/
     float:right;
     display: flex;
     align-items: center;
+    /* Make image sit in the center of bar, and more to the right */
+    position: relative;
+    top: -0.25em; /*(image height - bar height)/2*/
+    left: 5px;
+    background-color: white;
 }
-
 #inmedia{
-    background-color: darkorchid;
+    display: flex;
 }
 #hamMenu{
     display:none;
 }
 footer{
-    border-top:solid 1px rgb(43, 119, 226);
+    border-top:solid 1px rgb(126, 70, 146);
     margin-top: 2em;
+    padding-top: 1em;
+    display: flex;
+}
+footer div{
+    /* 2 divs: info sources, and media sources */
+    flex-basis: 50%;
+}
+footer ol li{
+    margin-bottom: 1em;
+}
+input{
+    width: 50%;
+    padding:0.5em;
+    text-align: right;
+    background-color: rgb(165, 220, 165);
+    margin: 1em 0; /*margin top and bottom*/
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* get rid of the number arrow thing on the side */
+  -webkit-appearance: none;
+  margin: 0;
+}
+button{
+    background-color: rgb(225, 180, 109);
+    padding: 0.5em;
+    /* border-radius goes clockwise */
+    border-radius: 5px 10px 5px 5px;
+    box-shadow: 5px 5px rgb(118, 105, 81);
+    border: none;
+    width: fit-content;
+    font-family: Lucida ,Monaco, Courier, monospace;
+}
+button:active{
+    /* give effect of button being pressed down */
+    box-shadow: none;
+    transform: translate(5px,5px);
+}
+.roundButton{
+    /* make border round */
+    border-radius: 500%;
+    box-shadow: 5px 5px rgb(118, 105, 81);
+    padding: 0;
+}
+#inmedia .roundButton{
+    width: 3em;
+    margin: 1em 0;
 }
 
 /*for js showing and hiding nav menu*/
@@ -201,5 +279,11 @@ footer{
     #hamMenu{
         display: block;
         position: relative;
-    } 
+    }
+    button{
+        padding: 1em;
+    }
+    footer{
+        display: inline;
+    }
 }
