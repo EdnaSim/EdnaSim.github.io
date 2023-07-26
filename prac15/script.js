@@ -1,6 +1,7 @@
-// Function to enter fullscreen mode
-function enterFullscreen() {
-    console.log("Fullscreen");
+// Check if the browser supports the Fullscreen API
+if (document.documentElement.requestFullscreen) {
+    // Function to enter fullscreen mode
+    function enterFullscreen() {
     if (document.documentElement.requestFullscreen) {
     document.documentElement.requestFullscreen();
     } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -10,8 +11,10 @@ function enterFullscreen() {
     } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
     document.documentElement.msRequestFullscreen();
     }
-}// Function to exit fullscreen mode
-function exitFullscreen() {
+    }
+    
+    // Function to exit fullscreen mode
+    function exitFullscreen() {
     if (document.exitFullscreen) {
     document.exitFullscreen();
     } else if (document.mozCancelFullScreen) { // Firefox
@@ -21,9 +24,10 @@ function exitFullscreen() {
     } else if (document.msExitFullscreen) { // IE/Edge
     document.msExitFullscreen();
     }
+    }
+    var FSbtn = document.querySelector("#fullscreen");
+    FSbtn.addEventListener("click", enterFullscreen());
+    var ExitFSbtn = document.querySelector("#exitfullscreen");
+    ExitFSbtn.addEventListener("click", exitFullscreen());
+   
 }
-
-var FSbtn = document.querySelector("#fullscreen");
-FSbtn.addEventListener("click", enterFullscreen());
-var ExitFSbtn = document.querySelector("#exitfullscreen");
-ExitFSbtn.addEventListener("click", exitFullscreen());
