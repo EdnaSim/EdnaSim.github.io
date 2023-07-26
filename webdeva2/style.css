@@ -17,7 +17,8 @@ header{
     background-color: rgb(218, 218, 218);
 }
 nav ul{
-    background-color: rgb(133, 145, 161);
+    background-color: rgb(75, 196, 126);
+    box-shadow: 0px -20px 30px 10px rgb(173, 93, 173) inset;
     text-align: center;
     margin-top: 0;
 }
@@ -35,7 +36,17 @@ nav ul li:hover{
     position: fixed;
     bottom: 0; /*stick to bottom*/
     padding: 0.5em;
+    /* border-raadius goes clockwise */
     border-radius: 5px 10px 0 0;
+    box-shadow: 5px 5px grey;
+}
+#BackToTop:hover{
+    text-transform: uppercase;
+}
+#BackToTop:active{
+    /* give effect of button being pressed down */
+    box-shadow: none;
+    transform: translate(-5px,5px);
 }
 img{
     max-width: 100%;
