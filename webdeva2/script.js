@@ -44,7 +44,7 @@ function hideForm(){
 hidepages(pigeonInfo);
 hidepages(falcInfo);
 hidepages(allpages);
-showpage(allpages, 2);
+showpage(allpages, 1);
 
 function backtotop(){
     window.scrollTo(0,0);
@@ -167,4 +167,112 @@ document.querySelector(".barFalc").addEventListener("animationend", function(){
     //change html to show the stuff
     document.querySelector("#speedGraph div p").innerHTML = countDiffHTML + "<br><b>The falcon tops out at 390 km/h!</b>";
 })
-    
+
+//Pigeon game stuff
+var score =0;
+var scoreboard = document.getElementById("pigeonScoreboard");
+var gamecontainer = document.getElementById("pigeonGame");
+var gamebg = document.getElementById("gameBG");
+//using canvas because it makes things disappear once out of canvas
+var ctx = gamebg.getContext("2d");
+//on mouse click in canvas
+gamebg.addEventListener("mousedown", function(event){
+    var mousepos = getMouseInCanvas(gamebg, event);
+    //https://web.archive.org/web/20161220195326/http://simonsarris.com/blog/510-making-html5-canvas-useful
+    for (var i=0; i < objects.length; i++){
+        if (objects[i].x <= mousepos.x && objects[i].x + objects[i].w >= mousepos.x
+            && objects[i].y <= mousepos.y && objects[i].y + objects[i].h >= mousepos.y){
+                score++;
+                scoreboard.innerHTML = "Score: " + score;
+        } 
+    }
+})
+//drawing canvas objects: https://jsfiddle.net/m1erickson/RCLtR/
+var spawnLineY = 0;
+//in ms
+var spawnRate = 1500;
+var width = 30;
+var height = 30;
+//when was the last object spawned
+var lastSpawn = -1;
+var objects = [];
+//save the starting time (used to calc elapsed time)
+var startTime = Date.now();
+
+function spawnRandomObject() {
+    // select a random type for this new object
+    var t;
+    if (Math.random() < 0.50) {
+        t = "yellow";
+    } else {
+        t = "rgb(120, 93, 35)";
+    }
+
+    // create the new object
+    var object = {
+        // set this objects type
+        type: t,
+        // set x randomly but at least 15px off the canvas edges
+        x: Math.random() * (gamebg.width - 30) + 15, //math.random gets between 0-1
+        // set y to start on the line where objects are spawned
+        y: spawnLineY,
+        w: width,
+        h: height,
+    }
+    // add the new object to the objects[] array
+    objects.push(object);
+}
+//continuously call animate
+var gameAnimateID;//to get interval ID for clearing
+document.querySelectorAll(".pigeonGameBtn")[0].style.display = "none";
+function stopPigeonGame(){
+    //stop calling the animate func
+    clearInterval(gameAnimateID);
+    //clear canvas context
+    ctx.clearRect(0, 0, gamebg.width, gamebg.height);
+    //display other button to Start game
+    document.querySelectorAll(".pigeonGameBtn")[0].style.display = "none";
+    document.querySelectorAll(".pigeonGameBtn")[1].style.display = "inline";
+}
+function startPigeonGame(){
+    //start continuous animate calls
+    gameAnimateID = setInterval(animate, 1);
+    //display the Stop button instead
+    document.querySelectorAll(".pigeonGameBtn")[0].style.display = "inline";
+    document.querySelectorAll(".pigeonGameBtn")[1].style.display = "none";
+}
+function animate() {
+    // get the elapsed time
+    var time = Date.now();
+    // see if its time to spawn a new object
+    if (time > (lastSpawn + spawnRate)) {
+        lastSpawn = time;
+        spawnRandomObject();
+    }
+    // clear the canvas so objects dont look like a trail
+    ctx.clearRect(0, 0, gamebg.width, gamebg.height);
+    // move each object down the canvas
+    for (var i = 0; i < objects.length; i++) {
+        var object = objects[i];
+        //move objects down at varying speed
+        object.y += Math.random() + 0.5;
+        //draw object as a rect with colour defined earlier by type
+        ctx.fillStyle = object.type;
+        ctx.fillRect(object.x, object.y, object.w, object.h);
+        ctx.closePath();
+        //object left canvas area
+        if (object.y > gamebg.height){
+            objects.splice(i, 1); //remove this 1 object from arr
+        }
+    }
+}
+
+function getMouseInCanvas(canvas, event){
+    var cRect = canvas.getBoundingClientRect();
+    var scaleX = canvas.width / cRect.width;
+    var scaleY = canvas.height / cRect.height;
+    return {
+        x: (event.clientX - cRect.left) / (cRect.right - cRect.left) * canvas.width,
+        y: (event.clientY - cRect.top) / (cRect.bottom - cRect.top) * canvas.height
+      }
+}

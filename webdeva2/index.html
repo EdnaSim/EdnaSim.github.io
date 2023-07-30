@@ -15,7 +15,7 @@
     <nav>
         <button id="hamMenu">Menu</button>
         <ul>
-            <li>History of pigeons</li>
+            <li>Pigeons</li>
             <li>Peregrine Falcons</li>
             <li>Birds in media</li>
         </ul>
@@ -63,12 +63,41 @@
             <p>
                 AKA Project Orcon (organic control) 
                 (homing missiles controlled by pigeons, minigame on following a target)
-                Project Pigeons: Modern day
+                Project Sea Hunt
                 (the one about finding people lost at sea)
                 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Ro068H6w8Vg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
             </p>
             <div id="pigeonGame">
-                <div id="pigeonCharacter"></div>
+                <!-- using table since row1 wants another col -->
+                <table>
+                    <tr> <!--row 1: buttons, and scoreboard-->
+                        <!-- these btns be replaced by the other when clicked -->
+                        <td>
+                            <button class="pigeonGameBtn" onclick="stopPigeonGame()">Stop</button>
+                            <button class="pigeonGameBtn" onclick="startPigeonGame()">Start</button>
+                        </td>
+                        <td>
+                            <div>
+                                Click the yellow boxes in time!
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="3" id="pigeonScoreboard">
+                            Score: 0
+                        </td>
+                    </tr>
+                    <tr> <!--row 2: the game-->
+                        <td colspan="3">
+                        <!-- set width and height here cuz of canvas' bitmap -->
+                        <canvas id="gameBG" width="400" height="400">
+                            <!-- only shows if the canvas is unsupported -->
+                            Your browser does not support Canvases.
+                        </canvas>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <footer>
                 <div>

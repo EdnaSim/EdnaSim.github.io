@@ -80,14 +80,20 @@ img{
 /* #pigeons{
     background-color: aquamarine;
 } */
-#pigeonCharacter{
-    /* Make a circle */
-    height: 1em;
-    width: 1em;
-    border-radius: 50%;
-    background-color: brown;
+#pigeonGame{
+    background-color: darkgray;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    /* top row for info display, bottom for game */
 }
-
+td{
+    text-align: center;
+    padding: 0.5em;
+}
+#gameBG{
+    background-color: rgb(47, 47, 166);
+}
 /* #perefalc{
     background-color: bisque;
 } */
