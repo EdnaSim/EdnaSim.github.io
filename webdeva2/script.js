@@ -39,25 +39,7 @@ ResizeFalcMap();
 resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
 
-var installPromptEvent;
-window.addEventListener('beforeinstallprompt', event => {
-    // Prevent Chrome <= 67 from automatically showing the prompt
-    event.preventDefault();
-    // Stash the event so it can be triggered later.
-    installPromptEvent = event;
-});
-if (installPromptEvent != null){
-    installPromptEvent.prompt();
-    installPromptEvent.userChoice.then(choice => {
-        if (choice.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-        } else {
-        console.log('User dismissed the A2HS prompt');
-        }
-        // Clear the saved prompt since it can't be used again
-        installPromptEvent = null;
-    });
-}
+
 window.addEventListener("scroll", function() {
     //if user scrolled down a certain amount, show the BackToTopBtn
     //amt scrolled > scrollable height
