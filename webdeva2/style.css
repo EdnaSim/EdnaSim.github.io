@@ -33,7 +33,7 @@ nav ul li:hover{
     color:rgb(213, 188, 85);
 }
 #installPrompt{
-    /* visibility: hidden; */
+    visibility: hidden;
     position: fixed;
     height: 15%;
     width: 100%;
