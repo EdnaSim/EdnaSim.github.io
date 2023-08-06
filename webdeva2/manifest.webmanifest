@@ -14,5 +14,6 @@
         }
     ],
     "start_url": "/webdeva2",
+    "id" : "/webdeva2",
     "display":"fullscreen"
 }
