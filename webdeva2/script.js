@@ -31,7 +31,7 @@ if (window.matchMedia("(max-width: 800px)").matches){
 hidepages(pigeonInfo);
 hidepages(falcInfo);
 hidepages(allpages);
-showpage(allpages, 2); //start page
+showpage(allpages, 1); //start page
 speedgraph.style.display = "none";
 //previous widths for the 2 image maps (pigeon, falc)
 var previousWidth1 = 1; //start at 1 for the first call (x * 1 = x)
