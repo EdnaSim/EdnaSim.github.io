@@ -51,8 +51,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
     installPromptBtn.style.visibility = "visible";
 });
 installPromptBtn.addEventListener('click', function() {
-    installPromptBtn.style.visibility = "hidden";
-    window.removeEventListener("beforeinstallprompt", function(){});
+    installPromptBtn.style.display = "none";
     //prompt user to install/add to home screen, using the saved event
     installPromptEvent.prompt();
     //no need anymore
