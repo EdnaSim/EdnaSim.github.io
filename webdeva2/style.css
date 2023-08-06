@@ -33,12 +33,14 @@ nav ul li:hover{
     color:rgb(213, 188, 85);
 }
 #installPrompt{
-    visibility: hidden;
+    /* visibility: hidden; */
     position: fixed;
-    height: 20%;
+    height: 15%;
     width: 100%;
-    background-color: rgb(163, 80, 163);
+    background-color: rgb(163, 80, 163); /*leave no gap at the bottom*/
+    border-radius: 20px 20px 0 0;
     bottom: 0;
+    /* above content, below Back to top btn */
     z-index: 1;
     /* text centered */
     padding: 0;
@@ -50,6 +52,8 @@ nav ul li:hover{
     /* center self */
     width: 100%;
     font-size: large;
+    font-weight: bold;
+    text-align: center;
 }
 #BackToTop{
     /* page starts at the top, so hide btn */

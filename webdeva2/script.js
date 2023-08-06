@@ -40,6 +40,7 @@ ResizeFalcMap();
 resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
 
+//reference: https://developer.chrome.com/blog/a2hs-updates/
 var installPromptEvent;
 //only happens on mobile. web auto-fires this prompt
 window.addEventListener('beforeinstallprompt', function(e) {
@@ -50,7 +51,9 @@ window.addEventListener('beforeinstallprompt', function(e) {
     //show the "add to home screen" btn
     installPromptBtn.style.visibility = "visible";
 });
+//click btn to get rid of it, and prompt for add to home screen
 installPromptBtn.addEventListener('click', function() {
+    //stop btn from showing up again (until refresh)
     installPromptBtn.style.display = "none";
     //prompt user to install/add to home screen, using the saved event
     installPromptEvent.prompt();
