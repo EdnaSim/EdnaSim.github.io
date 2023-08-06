@@ -35,11 +35,21 @@ nav ul li:hover{
 #installPrompt{
     visibility: hidden;
     position: fixed;
-    width:100%;
-    height: 10%;
-    background-color: blueviolet;
+    height: 20%;
+    width: 100%;
+    background-color: rgb(163, 80, 163);
     bottom: 0;
     z-index: 1;
+    /* text centered */
+    padding: 0;
+}
+#installPrompt div{
+    /* to put text in top-center */
+    position: absolute;
+    top: 20%;
+    /* center self */
+    width: 100%;
+    font-size: large;
 }
 #BackToTop{
     /* page starts at the top, so hide btn */

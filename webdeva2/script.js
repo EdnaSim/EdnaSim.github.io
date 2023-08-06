@@ -41,27 +41,22 @@ resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
 
 var installPromptEvent;
+//only happens on mobile. web auto-fires this prompt
 window.addEventListener('beforeinstallprompt', function(e) {
     // Prevents the default mini-infobar or install dialog from appearing on mobile
     e.preventDefault();
+    //save the event for later
     installPromptEvent = e;
+    //show the "add to home screen" btn
     installPromptBtn.style.visibility = "visible";
 });
 installPromptBtn.addEventListener('click', function() {
-    // Update the install UI to remove the install button
     installPromptBtn.style.visibility = "hidden";
-    // Show the modal add to home screen dialog
+    window.removeEventListener("beforeinstallprompt", function(){});
+    //prompt user to install/add to home screen, using the saved event
     installPromptEvent.prompt();
-    // Wait for the user to respond to the prompt
-    installPromptEvent.userChoice.then(choice => {
-      if (choice.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-      // Clear the saved prompt since it can't be used again
-      installPromptEvent = null;
-    });
+    //no need anymore
+    installPromptEvent = null;
   });
 
 window.addEventListener("scroll", function() {
