@@ -1,0 +1,18 @@
+{
+    "short_name": "BirdApp",
+    "name": "Cool Bird Facts",
+    "icons": [
+        {
+            "src": "Images/icon192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+          "src": "Images/icon512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }
+    ],
+    "start_url": "/?source=pwa",
+    "display":"fullscreen"
+}

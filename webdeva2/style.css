@@ -33,14 +33,17 @@ nav ul li:hover{
     color:rgb(213, 188, 85);
 }
 #BackToTop{
+    /* page starts at the top, so hide btn */
+    display: none;
     background-color: rgb(133, 145, 161);
     position: fixed;
     bottom: 0; /*stick to bottom*/
     /* border-radius goes clockwise */
     border-radius: 5px 10px 0 0;
     box-shadow: 5px 5px grey;
+    z-index: 2;
 }
-#BackToTop:hover, button:hover{
+button:hover{
     text-transform: uppercase;
 }
 #BackToTop:active{
@@ -62,8 +65,11 @@ img{
     display: inline-block;
 }
 .tooltip_Text {
+    /* max width is the width of the tooltip */
     visibility: hidden;
     position: absolute;
+    /* word break for RWD when overflowing screen width */
+    word-break: break-all;
     z-index: 1;
     color: rgb(255, 255, 255);
     background-color: rgba(4, 4, 4, 0.7);
@@ -71,15 +77,28 @@ img{
     padding: 10px 15px 10px 15px;
     bottom: 130%;
     left: 0;
-  }
-  
+}
+#loonToolTip{
+    /* make loon btn bigger so img is bigger. */
+    padding-left: 2em;
+    padding-right: 2em;
+}
+button.tooltip{
+    /* make the button tooltips stand out less */
+    background-color: rgb(159, 159, 159);
+    box-shadow: 5px 5px rgb(88, 87, 86);
+}
 .tooltip:hover .tooltip_Text {
     visibility: visible;
 }
+/* when tooltip is a button, only show when clicked, not hovered */
+button.tooltip:hover .tooltip_Text{
+    visibility: hidden;
+}
+button.tooltip:focus .tooltip_Text{
+    visibility: visible;
+}
 
-/* #pigeons{
-    background-color: aquamarine;
-} */
 #pigeonGame{
     background-color: darkgray;
     width: fit-content;
@@ -93,6 +112,10 @@ td{
 }
 #gameBG{
     background-color: rgb(47, 47, 166);
+}
+.sticky{
+    position: sticky;
+    top:0;
 }
 /* #perefalc{
     background-color: bisque;
@@ -149,7 +172,7 @@ td{
     margin: auto; /*center self*/
     justify-content: center; /*center content*/
 }
-#speedGraph div h3{
+#speedGraph h3{
     font-weight: 1; /*less bold*/
 }
 .bar{ /* bar background/container */
@@ -195,6 +218,7 @@ td{
     display: flex;
 }
 #hamMenu{
+    /* only visible when screen width < 800 */
     display:none;
 }
 footer{
@@ -202,6 +226,7 @@ footer{
     margin-top: 2em;
     padding-top: 1em;
     display: flex;
+    height: fit-content;
 }
 footer div{
     /* 2 divs: info sources, and media sources */
@@ -220,7 +245,7 @@ input{
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
-/* get rid of the number arrow thing on the side */
+/* get rid of the number arrow thing on the side of input field */
   -webkit-appearance: none;
   margin: 0;
 }
@@ -242,7 +267,7 @@ button:active{
 .roundButton{
     /* make border round */
     border-radius: 500%;
-    box-shadow: 5px 5px rgb(118, 105, 81);
+    box-shadow: 5px 5px rgb(88, 87, 86);
     padding: 0;
 }
 #inmedia .roundButton{
@@ -266,30 +291,140 @@ button:active{
 }
 
 @media screen and (max-width:800px){
-    #pageContainer{
+    body{
         padding: 0;
     }
-    nav ul{
+    #pageContainer{
+        padding: 0 2px;
+    }
+    header{
+        font-size: 2.5em;
+        /* mimic nav colours on larger devices */
+        border-bottom: 10px solid rgb(75, 196, 126);
+        /* outline: medium solid rgb(173, 93, 173); */
+        box-shadow: 0px 10px 10px 5px rgb(173, 93, 173);
+    }
+    nav{
+        z-index: 2;
+        position: sticky;
+        top:0;
+    }
+    nav div{
+        position: relative;
+    }
+    nav div ul{
+        box-shadow: none;
         transform-origin: 0%;
-        position: absolute;
         margin:0;
         width:fit-content;
+        position: absolute;
+        border-radius: 0 0 15px 0;
     }
-    nav ul li{
+    nav div ul li{
         display:block;
     }
-    div div {
-        margin-left: 10%;
-        margin-right: 10%;
-    }
     #hamMenu{
+        z-index: 3; /*show above the rest of the nav*/
+        display: inline;
+        /* more padding vertically, gap between edge of screen and the button */
+        padding: 1em 0.5em;
+        /* stay on the left, in the nav menu */
+        position: absolute;
+        margin:0; 
+    }
+    /* https://www.w3schools.com/howto/howto_css_menu_icon.asp */
+    /* animate the spans to move into a cross and back*/
+    #hamMenu span{
         display: block;
+        width: 40px;
+        height: 5px;
+        /* margin for spacing between bars */
+        margin-bottom: 10px;
         position: relative;
+        background-color: rgb(0, 0, 0);
+        border-radius: 5px;
+        /* line up transition time with .toggleDisplay */
+        transition: 0.5s;
+    }
+    /* when toggled in script, each bar has different anim */
+    .hamMenuSpanAnim .hambar:nth-of-type(1){
+        /* pivot is in the center of bar so move up a bit */
+        transform: translate(0, 15px) rotate(-45deg);
+    }
+    .hamMenuSpanAnim .hambar:nth-of-type(2){
+        /* vanish */
+        opacity: 0;
+    }
+    .hamMenuSpanAnim .hambar:nth-of-type(3){
+        /* pivot is in the center of bar so move down a bit */
+        transform: translate(0, -15px) rotate(45deg);
     }
     button{
         padding: 1em;
     }
+    button.tooltip{
+        margin: 1em 0;
+    }
+    td{
+        /* remove side padding, lower vertical padding */
+        padding: 0.2em 0;
+        overflow: hidden;
+    }
+    table{
+        padding:0;
+    }
+    section{
+        /* gap between the starting pos of hamMenu, and content */
+        margin-top: 55px;
+    }
+    #pigeons div img{
+        /* make image big, it auto-resizes */
+        width:400px;
+    }
+    #pigeonDiag{
+        /* container */
+        text-align: center;
+        vertical-align: top;
+        position: relative;
+    }
+    .pigeoninfo{
+        margin-top: 0.5em;
+        background-color: rgb(199, 172, 105);
+        border: 1px solid black;
+        border-radius: 10px 10px 10px 10px;
+        width: 100%;
+    }
+    #FalcDiagram{
+        display: block;
+        margin:0;
+    }
+    .FalcLeft, .FalcRight{
+        margin-top: 0.5em;
+        position: static; /*push other content down for space*/
+        animation: none;
+        left:0;
+        right:0;
+    }
+    #speedGraph > div:nth-of-type(2){
+        /* keep width constant so p text does not affect width */
+        flex-basis:80%;
+    }
+    /* bars using % since container width is more fixed*/
+    /* when p text updated, box width would change and de-center the bars */
+    .bar:nth-of-type(1){
+        width: 100%;
+    }
+    .bar:nth-of-type(2){
+        width: 40.6%;
+    }
+    .bar:nth-of-type(3){
+        width: 41.2%;
+    }
+
     footer{
-        display: inline;
+        padding-top: 1em;
+        /* extra space below footer so BackToTop btn wont cover the content */
+        padding-bottom: 3em;
+        display: inline-block;
     }
 }

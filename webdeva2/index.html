@@ -7,18 +7,26 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="Images/pigeon.png"> <!--favicon-->
+    <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
     <header>
         Cool bird facts
     </header>
     <nav>
-        <button id="hamMenu">Menu</button>
-        <ul>
-            <li>Pigeons</li>
-            <li>Peregrine Falcons</li>
-            <li>Birds in media</li>
-        </ul>
+        <div>
+            <!-- <button id="hamMenu"><img src="Images/HamIcon.png"></button> -->
+            <div id="hamMenu">
+                <span class="hambar"></span>
+                <span class="hambar"></span>
+                <span class="hambar"></span>
+            </div>
+            <ul>
+                <li>Pigeons</li>
+                <li>Peregrine Falcons</li>
+                <li>Birds in media</li>
+            </ul>
+        </div>
     </nav>
 
     <button id="BackToTop">Back to top</button>
@@ -33,10 +41,10 @@
             <p>
                 Click on various parts of the image to learn more
             </p>
-            <div>
+            <div id="pigeonDiag">
                 <!-- img map of pigeon, with spans that change as the user clicks on the map -->
                 <img src="Images/pigeon.png" alt="Pigeon" usemap="#pigeonMap">
-                <map name="pigeonMap">
+                <map name="pigeonMap" id="pigeonMap">
                     <!-- When parts of map clicked, run the function to show the info -->
                     <area alt="Eye" title="Eye" href="#" coords="123,57,8" shape="circle" onclick="showPigeonInfo(0)">
                     <area alt="Ear" title="Ear" href="#" coords="100,62,11" shape="circle" onclick="showPigeonInfo(1)">
@@ -44,13 +52,13 @@
                 </map>
 
                 <span class="spanTop pigeoninfo">
-                    Eye: 
+                    <h2>Eye</h2> 
                 </span>
                 <span class="spanTop pigeoninfo">
-                    Ear: 
+                    <h2>Ear</h2> 
                 </span>
                 <span class="spanTop pigeoninfo">
-                    Brain: 
+                    <h2>Brain</h2> 
                 </span>
             </div>
             
@@ -73,8 +81,9 @@
                     <tr> <!--row 1: buttons, and scoreboard-->
                         <!-- these btns be replaced by the other when clicked -->
                         <td>
-                            <button class="pigeonGameBtn" onclick="stopPigeonGame()">Stop</button>
-                            <button class="pigeonGameBtn" onclick="startPigeonGame()">Start</button>
+                            <!-- scrolling will be disabled so its less annoying on mobile -->
+                            <button class="pigeonGameBtn" onclick="stopPigeonGame(), enableScrolling()">Stop</button>
+                            <button class="pigeonGameBtn" onclick="startPigeonGame(), disableScrolling()">Start</button>
                         </td>
                         <td>
                             <div>
@@ -86,6 +95,7 @@
                     <tr>
                         <td colspan="3" id="pigeonScoreboard">
                             Score: 0
+                            <br>Accuracy: -
                         </td>
                     </tr>
                     <tr> <!--row 2: the game-->
@@ -124,21 +134,7 @@
                 <!-- text on both sides of imagemap, 
                 when one is clicked, the other text on the same side needs to be hidden,
                 text can exist on both sides of the image at the same time-->
-                <span class="FalcLeft">
-                    <h2>Baffle / Tubercle</h2>
-                    <p>
-                        Inspiration for jet engines
-                    </p>
-                </span>
-                <span class="FalcLeft">
-                    <h2>Tomial Tooth</h2>
-                </span>
-                <span class="FalcRight">
-                    <h2>Eye</h2>
-                </span>
-                <span class="FalcRight">
-                    <h2>Heart and Lungs</h2>
-                </span>
+                
                 <div>
                     <img src="Images/FalcDiagram.png" usemap="#falcdiag">
                     <map name="falcdiag" id="falcdiag">
@@ -148,6 +144,22 @@
                         <area alt="Body" title="Body" href="#" coords="241,400,400,441" shape="rect" onclick="showFalcInfo(3)">
                     </map>
                 </div>
+                <span class="FalcLeft">
+                    <h2>Baffle / Tubercle</h2>
+                    <p>
+                        Inspiration for jet engines
+                    </p>
+                </span>
+                <span class="FalcLeft">
+                    <h2>Tomial Tooth</h2>
+                    <p>A special protrusion on the beak used to break the necks of small prey</p>
+                </span>
+                <span class="FalcRight">
+                    <h2>Eye</h2>
+                </span>
+                <span class="FalcRight">
+                    <h2>Heart and Lungs</h2>
+                </span>
                 
             </div>
             <h1>Comparison</h1>
@@ -228,14 +240,43 @@
             <audio id="redtailedhawk"><source src="Audio/RedTailedHawk.ogg" type="audio/ogg">
                 Audio file unsupported (ogg)
             </audio>
-            <h1>Bald Eagle</h1>
-            Have you heard this call? 
+            <audio id="loon">
+                <source src="Audio/Loon.ogg" type="audio/ogg">
+                Audio file unsupported (ogg)
+            </audio>
+            <audio id="owl">
+                <source src="Audio/GreatHornedOwl.ogg" type="audio/ogg">
+                Audio file unsupported (ogg)
+            </audio>
+
+            <h1>Freedom is calling</h1>
+            Have you heard this call? It's often accompanied by imagery of the Bald Eagle, or other raptors (Birds of prey)
             <button class="roundButton" onclick="playAudio('redtailedhawk')"><img class="soundBtn" src="Images/soundBtn.png"></button>
-            <br>This is actually the call of the Red Tailed Hawk.
+            <br>This is actually the call of the
+            <!-- press button to show bird picture -->
+            <button class="tooltip" id="redtailedhawkToolTip">Red Tailed Hawk
+                <span class="tooltip_Text"><img src="Images/RTH.png"></span>
+            </button>
             <br>This is what the Bald Eagle actually sounds like: 
             <button class="roundButton" onclick="playAudio('eagle')"><img class="soundBtn" src="Images/soundBtn.png"></button>
-            <h1>Common Loon</h1>
 
+            <h1>Ominous wail</h1>
+            There is a good chance that you've heard this sound playing during a suspenseful movie scene.
+            <button class="roundButton" onclick="playAudio('loon')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <br>The voice actor of this sound is the
+            <!-- press button to show bird picture -->
+            <button class="tooltip" id="loonToolTip">Common Loon
+                <span class="tooltip_Text"><img src="Images/CommonLoon.jpg"></span>
+            </button>
+
+            <h1>Hoot Hoot</h1>
+            Owls make a lot of noises, from demonic screeching to the popular "hoot" noise that most people associate with them.
+            <br><button class="roundButton" onclick="playAudio('owl')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <br>The owl that this signature call belongs to is the
+            <button class="tooltip" id="owlToolTip">Great Horned Owl
+                <span class="tooltip_Text"><img src="Images/GHO.png"></span>
+            </button>
+            
             <footer>
                 <div>
                     Sources:
@@ -258,6 +299,36 @@
                             <a class="tooltip" href="https://youtu.be/WSGFatM1ktU" target="_blank" rel="noopener">
                                 Cinematic Eagle Cry Sound Effect - SoundEffectsFactory (Youtube)
                                 <span class="tooltip_Text">https://youtu.be/WSGFatM1ktU</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://youtu.be/4ENNzjy8QjU?t=29" target="_blank" rel="noopener">
+                                Voices: Common Loon - Cornell Lab of Ornithology (Youtube)
+                                <span class="tooltip_Text">https://youtu.be/4ENNzjy8QjU?t=29</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://macaulaylibrary.org/asset/484503" target="_blank" rel="noopener">
+                                The Cornell Lab - Screenshot from a video taken by Benjamin Clock
+                                <span class="tooltip_Text">https://macaulaylibrary.org/asset/484503</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://www.allaboutbirds.org/guide/Common_Loon/photo-gallery" target="_blank" rel="noopener">
+                                The Cornell Lab - Photo taken by Christian Hagenlocher
+                                <span class="tooltip_Text">www.allaboutbirds.org/guide/Common_Loon/photo-gallery</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://macaulaylibrary.org/asset/22874" target="_blank" rel="noopener">
+                                The Cornell Lab - Great Horned Owl. Audio taken by William R. Fish
+                                <span class="tooltip_Text">https://macaulaylibrary.org/asset/22874</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip" href="https://macaulaylibrary.org/asset/63942211" target="_blank" rel="noopener">
+                                The Cornell Lab - Great Horned Owl. Image taken by Mary Rumple
+                                <span class="tooltip_Text">https://macaulaylibrary.org/asset/63942211</span>
                             </a>
                         </li>
                     </ol>
