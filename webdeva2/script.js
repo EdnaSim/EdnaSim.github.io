@@ -50,7 +50,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 installPromptBtn.addEventListener('click', function() {
     // Update the install UI to remove the install button
-    installPromptBtn.style.display = "none";
+    installPromptBtn.style.visibility = "hidden";
     // Show the modal add to home screen dialog
     installPromptEvent.prompt();
     // Wait for the user to respond to the prompt
