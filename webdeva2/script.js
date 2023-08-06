@@ -39,7 +39,6 @@ ResizeFalcMap();
 resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
 
-
 window.addEventListener("scroll", function() {
     //if user scrolled down a certain amount, show the BackToTopBtn
     //amt scrolled > scrollable height
