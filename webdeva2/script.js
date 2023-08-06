@@ -39,14 +39,13 @@ var previousWidth2 = 1;
 ResizeFalcMap();
 resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
+
 var installPromptEvent;
 window.addEventListener('beforeinstallprompt', function(e) {
     // Prevents the default mini-infobar or install dialog from appearing on mobile
     e.preventDefault();
     installPromptEvent = e;
-    if (window.matchMedia("(max-width: 800px)").matches){
-        installPromptBtn.style.visibility = "visible";
-    }
+    installPromptBtn.style.visibility = "visible";
 });
 installPromptBtn.addEventListener('click', function() {
     // Update the install UI to remove the install button
