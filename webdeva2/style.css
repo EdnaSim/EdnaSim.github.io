@@ -258,6 +258,12 @@ footer div{
 footer ol li{
     margin-bottom: 1em;
 }
+.QRcode{
+    /* block so margin auto works */
+    display: block;
+    width: 20%;
+    margin:auto;
+}
 input{
     width: 50%;
     padding:0.5em;
@@ -345,6 +351,9 @@ button:active{
     }
     nav div ul li{
         display:block;
+    }
+    nav ul li:hover{
+        color: rgb(216, 114, 6);
     }
     #hamMenu{
         z-index: 3; /*show above the rest of the nav*/
@@ -449,5 +458,9 @@ button:active{
         /* extra space below footer so BackToTop btn wont cover the content */
         padding-bottom: 3em;
         display: inline-block;
+    }
+    /* no need for QR code on mobile */
+    .QRcode{
+        display: none;
     }
 }

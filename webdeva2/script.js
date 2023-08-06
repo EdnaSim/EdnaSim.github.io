@@ -1,6 +1,6 @@
-const page1btn = document.querySelectorAll("nav div ul li")[0];
-const page2btn = document.querySelectorAll("nav div ul li")[1];
-const page3btn = document.querySelectorAll("nav div ul li")[2];
+var page1btn = document.querySelectorAll("nav div ul li")[0];
+var page2btn = document.querySelectorAll("nav div ul li")[1];
+var page3btn = document.querySelectorAll("nav div ul li")[2];
 var allpages = document.querySelectorAll("div section");
 const installPromptBtn = document.getElementById("installPrompt");
 /*for hamMenu */
@@ -8,15 +8,15 @@ const hamBtn=document.querySelector("#hamMenu");
 const menuItemsList=document.querySelector("nav ul");
 const backtotopBtn = document.querySelector("#BackToTop");
 
-const pigeonInfo = document.querySelectorAll(".pigeoninfo");
+var pigeonInfo = document.querySelectorAll(".pigeoninfo");
 var pigeonGameBtns = document.querySelectorAll(".pigeonGameBtn");
-var scoreboard = document.getElementById("pigeonScoreboard");
-var gamecontainer = document.getElementById("pigeonGame");
-var gamebg = document.getElementById("gameBG");
+const scoreboard = document.getElementById("pigeonScoreboard");
+const gamecontainer = document.getElementById("pigeonGame");
+const gamebg = document.getElementById("gameBG");
 //using canvas because it makes things disappear once out of canvas
-var ctx = gamebg.getContext("2d");
+const ctx = gamebg.getContext("2d");
 
-const falcInfo = document.querySelectorAll(".FalcLeft, .FalcRight");
+var falcInfo = document.querySelectorAll(".FalcLeft, .FalcRight");
 var falcleft = document.querySelectorAll(".FalcLeft");
 var falcright = document.querySelectorAll(".FalcRight");
 const speedgraph = document.querySelectorAll("#speedGraph div")[1];
@@ -33,9 +33,10 @@ hidepages(falcInfo);
 hidepages(allpages);
 showpage(allpages, 3); //start page
 speedgraph.style.display = "none";
+//previous widths for the 2 image maps (pigeon, falc)
 var previousWidth1 = 1; //start at 1 for the first call (x * 1 = x)
-ResizePigeonMap();
 var previousWidth2 = 1;
+ResizePigeonMap();
 ResizeFalcMap();
 resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
@@ -71,7 +72,7 @@ window.addEventListener("scroll", function() {
     else{
         backtotopBtn.style.display = "none";
     }
-})
+});
 
 // https://stackoverflow.com/questions/8634875/how-to-put-border-on-area
 // get areas of all image maps and create a border of the areas when hovered
@@ -83,7 +84,7 @@ for(let area of areas) {
 
     //prevent clicking area from moving the screen
     area.addEventListener("click", function(e){e.preventDefault();});
-};
+}
 
 window.addEventListener("resize", function(){
     //when resize, close the menu (prevent menu being open while ham isnt X)
@@ -108,23 +109,44 @@ window.addEventListener("resize", function(){
     resizeGameBG();
 });
 //listen for click
-page1btn.addEventListener("click", function () {showpage(allpages, 1), ResizePigeonMap();});
-page2btn.addEventListener("click", function () {showpage(allpages, 2), ResizeFalcMap();});
-page3btn.addEventListener("click", function () {showpage(allpages, 3)});
+page1btn.addEventListener("click", function () {showpage(allpages, 1); ResizePigeonMap();});
+page2btn.addEventListener("click", function () {showpage(allpages, 2); ResizeFalcMap();});
+page3btn.addEventListener("click", function () {showpage(allpages, 3);});
 hamBtn.addEventListener("click",toggleMenus);
 backtotopBtn.addEventListener("click", backtotop);
-//falcon speed graph bars finish aniamtion
+//pigeon map area click listeners
+document.querySelectorAll("#pigeonMap area")[0].addEventListener("click", function(){showPigeonInfo(0);});
+document.querySelectorAll("#pigeonMap area")[1].addEventListener("click", function(){showPigeonInfo(1);});
+document.querySelectorAll("#pigeonMap area")[2].addEventListener("click", function(){showPigeonInfo(2);});
+//pigeon game start/stop btns
+pigeonGameBtns[0].addEventListener("click", function(){stopPigeonGame(); enableScrolling();});
+pigeonGameBtns[1].addEventListener("click", function(){startPigeonGame(); disableScrolling();});
+//falc map area clicks
+document.querySelectorAll("#falcdiag area")[0].addEventListener("click", function(){showFalcInfo(0);});
+document.querySelectorAll("#falcdiag area")[1].addEventListener("click", function(){showFalcInfo(1);});
+document.querySelectorAll("#falcdiag area")[2].addEventListener("click", function(){showFalcInfo(2);});
+document.querySelectorAll("#falcdiag area")[3].addEventListener("click", function(){showFalcInfo(3);});
+//falc speed comparison btns
+document.getElementById("hideFormBtn").addEventListener("click", hideForm);
+document.getElementById("restartAnimBtn").addEventListener("click", RestartAnim);
+//audio buttons in Birds In Media
+document.querySelectorAll(".roundButton")[0].addEventListener("click", function(){playAudio("redtailedhawk");});
+document.querySelectorAll(".roundButton")[1].addEventListener("click", function(){playAudio("eagle");});
+document.querySelectorAll(".roundButton")[2].addEventListener("click", function(){playAudio("loon");});
+document.querySelectorAll(".roundButton")[3].addEventListener("click", function(){playAudio("owl");});
+//falcon speed graph bars finish animation
 document.querySelector(".barFalc").addEventListener("animationend", function(){
     //bar moving anims end at the same time, so just call one of them
     //to change the <p> text once anim ends
     var diff = 390 - document.querySelector(".form form input").value;
+    var countDiffHTML;
     //convert neg to pos
     if (diff < 0)
         diff = diff * -1;
     if (diff != 0)
-        var countDiffHTML = "Your guess was " + diff + " off!" ;
+        countDiffHTML = "Your guess was " + diff + " off!" ;
     else //guess was perfect, no need show difference
-        var countDiffHTML= "";
+        countDiffHTML= "";
     //change html to show the stuff
     document.querySelector("#speedGraph div p").innerHTML = countDiffHTML + "<br><b>The falcon tops out at 390 km/h!</b>";
 });
@@ -134,8 +156,8 @@ gamebg.addEventListener("mousedown", function(event){
     //https://web.archive.org/web/20161220195326/http://simonsarris.com/blog/510-making-html5-canvas-useful
     for (var i=0; i < objects.length; i++){
         //check if object was clicked
-        if (objects[i].x <= mousepos.x && objects[i].x + objects[i].w >= mousepos.x
-            && objects[i].y <= mousepos.y && objects[i].y + objects[i].h >= mousepos.y){
+        if (objects[i].x <= mousepos.x && objects[i].x + objects[i].w >= mousepos.x && 
+            objects[i].y <= mousepos.y && objects[i].y + objects[i].h >= mousepos.y){
             //check type
             if (objects[i].type == "yellow"){
                 //if obj not clicked before, give score
@@ -165,7 +187,7 @@ function hideForm(){
     var n =document.querySelector(".form form input").value;
     //message for how good the player's guesses were
     if (n >= 250 && n <= 300 ){
-        p.innerHTML = "<b>Close guess! It's actually faster!</b>"
+        p.innerHTML = "<b>Close guess! It's actually faster!</b>";
     }
     else if (n > 300 && n < 390){
         p.innerHTML = "<b>Great guess!</b>";
@@ -173,8 +195,8 @@ function hideForm(){
     else if (n == 390){
         p.innerHTML ="<b>Right on!</b>";
     }
-    else if (n > 390 && b < 450){
-        p.innerHTML = "<b>Close guess! It's actually slower!</b>"
+    else if (n > 390 && n < 450){
+        p.innerHTML = "<b>Close guess! It's actually slower!</b>";
     }
 }
 
@@ -384,8 +406,6 @@ var height = 30;
 //when was the last object spawned
 var lastSpawn = -1;
 var objects = [];
-//save the starting time (used to calc elapsed time)
-var startTime = Date.now();
 
 function spawnRandomObject() {
     //randomise spawn rate
@@ -451,7 +471,7 @@ function spawnRandomObject() {
         h: height,
         //to record if this box has been clicked
         clicked: false,
-    }
+    };
     //console.log(object.x + " , " + object.y + "| dir: " + object.dirX + ","+object.dirY);
     // add the new object to the objects[] array
     objects.push(object);
@@ -492,7 +512,7 @@ function startPigeonGame(){
 function disableScrolling(){
     //https://www.geeksforgeeks.org/how-to-disable-scrolling-temporarily-using-javascript/
     // get curr scroll pos. using or (||) in case one of them returns 0
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   
     //if window scrolls, set to the prev y, nullifying the scroll
     window.onscroll = function() {
@@ -525,8 +545,8 @@ function animate() {
         ctx.fillRect(object.x, object.y, object.w, object.h);
         ctx.closePath();
         //object left canvas area
-        if (object.y > gamebg.height || object.y < 0
-            || object.x > gamebg.width || object.x < 0){
+        if (object.y > gamebg.height || object.y < 0 || 
+            object.x > gamebg.width || object.x < 0){
             objects.splice(i, 1); //remove this 1 object from arr
             UpdatePigeonSB();
         }
@@ -534,11 +554,12 @@ function animate() {
 }
 
 function getMouseInCanvas(canvas, event){
+    //get pos of canvas (including scrolling)
     var cRect = canvas.getBoundingClientRect();
-    var scaleX = canvas.width / cRect.width;
-    var scaleY = canvas.height / cRect.height;
+    //clientX/Y: pos of mouse on the screen (irregardless of scrolling)
     return {
-        x: (event.clientX - cRect.left) / (cRect.right - cRect.left) * canvas.width,
-        y: (event.clientY - cRect.top) / (cRect.bottom - cRect.top) * canvas.height
-      }
+        //pos on screen - canvas pos
+        x: (event.clientX - cRect.left),
+        y: (event.clientY - cRect.top)
+    };
 }

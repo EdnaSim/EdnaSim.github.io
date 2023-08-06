@@ -19,7 +19,6 @@
     </header>
     <nav>
         <div>
-            <!-- <button id="hamMenu"><img src="Images/HamIcon.png"></button> -->
             <div id="hamMenu">
                 <span class="hambar"></span>
                 <span class="hambar"></span>
@@ -52,19 +51,19 @@
                 <img src="Images/pigeon.png" alt="Pigeon" usemap="#pigeonMap">
                 <map name="pigeonMap" id="pigeonMap">
                     <!-- When parts of map clicked, run the function to show the info -->
-                    <area alt="Eye" title="Eye" href="#" coords="123,57,8" shape="circle" onclick="showPigeonInfo(0)">
-                    <area alt="Ear" title="Ear" href="#" coords="100,62,11" shape="circle" onclick="showPigeonInfo(1)">
-                    <area alt="Brain" title="Brain" href="#" coords="68,45,93,28,113,26,135,28,150,37,161,49" shape="poly" onclick="showPigeonInfo(2)">
+                    <area alt="Eye" title="Eye" href="#" coords="123,57,8" shape="circle">
+                    <area alt="Ear" title="Ear" href="#" coords="100,62,11" shape="circle">
+                    <area alt="Brain" title="Brain" href="#" coords="68,45,93,28,113,26,135,28,150,37,161,49" shape="poly">
                 </map>
 
                 <span class="spanTop pigeoninfo">
-                    <h2>Eye</h2> 
+                    <strong>Eye</strong><br>
                 </span>
                 <span class="spanTop pigeoninfo">
-                    <h2>Ear</h2> 
+                    <strong>Ear</strong><br>
                 </span>
                 <span class="spanTop pigeoninfo">
-                    <h2>Brain</h2> 
+                    <strong>Brain</strong><br>
                 </span>
             </div>
             
@@ -88,14 +87,15 @@
                         <!-- these btns be replaced by the other when clicked -->
                         <td>
                             <!-- scrolling will be disabled so its less annoying on mobile -->
-                            <button class="pigeonGameBtn" onclick="stopPigeonGame(), enableScrolling()">Stop</button>
-                            <button class="pigeonGameBtn" onclick="startPigeonGame(), disableScrolling()">Start</button>
+                            <button class="pigeonGameBtn">Stop</button>
+                            <button class="pigeonGameBtn">Start</button>
                         </td>
                         <td>
                             <div>
                                 Click the yellow boxes in time!
                             </div>
                         </td>
+                        <td></td>
                         
                     </tr>
                     <tr>
@@ -142,29 +142,28 @@
                 text can exist on both sides of the image at the same time-->
                 
                 <div>
-                    <img src="Images/FalcDiagram.png" usemap="#falcdiag">
+                    <img src="Images/FalcDiagram.png" alt="falcon diagram" usemap="#falcdiag">
                     <map name="falcdiag" id="falcdiag">
-                        <area alt="Nose" title="Nose" href="#" coords="10,31,170,70" shape="rect" onclick="showFalcInfo(0)">
-                        <area alt="Beak" title="Beak" href="#" coords="80,239,220,281" shape="rect" onclick="showFalcInfo(1)">
-                        <area alt="Eye" title="Eye" href="#" coords="440,70,500,110" shape="rect" onclick="showFalcInfo(2)">
-                        <area alt="Body" title="Body" href="#" coords="241,400,400,441" shape="rect" onclick="showFalcInfo(3)">
+                        <area alt="Nose" title="Nose" href="#" coords="10,31,170,70" shape="rect">
+                        <area alt="Beak" title="Beak" href="#" coords="80,239,220,281" shape="rect">
+                        <area alt="Eye" title="Eye" href="#" coords="440,70,500,110" shape="rect">
+                        <area alt="Body" title="Body" href="#" coords="241,400,400,441" shape="rect">
                     </map>
                 </div>
+                <!-- using strong cuz h2 not allowed in span -->
                 <span class="FalcLeft">
-                    <h2>Baffle / Tubercle</h2>
-                    <p>
-                        Inspiration for jet engines
-                    </p>
+                    <strong>Baffle / Tubercle</strong><br>
+                    Inspiration for jet engines
                 </span>
                 <span class="FalcLeft">
-                    <h2>Tomial Tooth</h2>
-                    <p>A special protrusion on the beak used to break the necks of small prey</p>
+                    <strong>Tomial Tooth</strong><br>
+                    A special protrusion on the beak used to break the necks of small prey
                 </span>
                 <span class="FalcRight">
-                    <h2>Eye</h2>
+                    <strong>Eye</strong><br>
                 </span>
                 <span class="FalcRight">
-                    <h2>Heart and Lungs</h2>
+                    <strong>Heart and Lungs</strong><br>
                 </span>
                 
             </div>
@@ -176,15 +175,15 @@
                         <label for="guess">Guess the speed of a Peregrine Falcon!</label>
                         <input name="guess" id="guess" value="0" type="number"> <span>km/h</span>
                     </form>
-                    <button onclick="hideForm()">Guess!</button>
+                    <button id="hideFormBtn">Guess!</button>
                 </div>
                 <div>
-                    <button onclick="RestartAnim()">Restart</button>
+                    <button id="restartAnimBtn">Restart</button>
                     <p><b>Let's see...</b></p> <!--after guessing speed-->
                     <h3>Peregrine Falcon</h3>
                     <div class="bar">
                         <div class="barFalc">
-                            <span><img src="Images/FalcIcon.png"></span>
+                            <span><img src="Images/FalcIcon.png" alt="Falcon icon"></span>
                         </div>
                     </div>
 
@@ -257,30 +256,30 @@
 
             <h1>Freedom is calling</h1>
             Have you heard this call? It's often accompanied by imagery of the Bald Eagle, or other raptors (Birds of prey)
-            <button class="roundButton" onclick="playAudio('redtailedhawk')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <button class="roundButton"><img class="soundBtn" src="Images/soundBtn.png" alt="sound btn"></button>
             <br>This is actually the call of the
             <!-- press button to show bird picture -->
             <button class="tooltip" id="redtailedhawkToolTip">Red Tailed Hawk
-                <span class="tooltip_Text"><img src="Images/RTH.png"></span>
+                <span class="tooltip_Text"><img src="Images/RTH.png" alt="Red Tailed Hawk"></span>
             </button>
             <br>This is what the Bald Eagle actually sounds like: 
-            <button class="roundButton" onclick="playAudio('eagle')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <button class="roundButton"><img class="soundBtn" src="Images/soundBtn.png" alt="sound btn"></button>
 
             <h1>Ominous wail</h1>
             There is a good chance that you've heard this sound playing during a suspenseful movie scene.
-            <button class="roundButton" onclick="playAudio('loon')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <button class="roundButton"><img class="soundBtn" src="Images/soundBtn.png" alt="sound btn"></button>
             <br>The voice actor of this sound is the
             <!-- press button to show bird picture -->
             <button class="tooltip" id="loonToolTip">Common Loon
-                <span class="tooltip_Text"><img src="Images/CommonLoon.jpg"></span>
+                <span class="tooltip_Text"><img src="Images/CommonLoon.jpg" alt="Common Loon"></span>
             </button>
 
             <h1>Hoot Hoot</h1>
             Owls make a lot of noises, from demonic screeching to the popular "hoot" noise that most people associate with them.
-            <br><button class="roundButton" onclick="playAudio('owl')"><img class="soundBtn" src="Images/soundBtn.png"></button>
+            <br><button class="roundButton"><img class="soundBtn" src="Images/soundBtn.png" alt="sound btn"></button>
             <br>The owl that this signature call belongs to is the
             <button class="tooltip" id="owlToolTip">Great Horned Owl
-                <span class="tooltip_Text"><img src="Images/GHO.png"></span>
+                <span class="tooltip_Text"><img src="Images/GHO.png" alt="Great Horned Owl"></span>
             </button>
             
             <footer>
@@ -341,7 +340,10 @@
                 </div>
             </footer>
         </section>
-
+        <!-- QR outside of sections so it persists across pages -->
+        <div>
+            <img src="Images/QR.png" class="QRcode" alt="https://ednasim.github.io/webdeva2">
+        </div>
     </div>
 </body>
 </html>
