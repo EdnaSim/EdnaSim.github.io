@@ -203,7 +203,7 @@ function hideForm(){
 function RestartAnim(){ 
     document.getElementById("speedGuessForm").style.display = "inline";
     //text back to original
-    document.querySelector("#speedGraph div p").innerHTML="<b>Let's see...</b>"
+    document.querySelector("#speedGraph div p").innerHTML="<b>Let's see...</b>";
     speedgraph.style.display = "none";
     //cloning method adapted from: https://stackoverflow.com/questions/58170892/javascript-add-remove-animation-class-only-animates-once
     // let bars = document.querySelectorAll(".bar div");
