@@ -2,6 +2,7 @@ const page1btn = document.querySelectorAll("nav div ul li")[0];
 const page2btn = document.querySelectorAll("nav div ul li")[1];
 const page3btn = document.querySelectorAll("nav div ul li")[2];
 var allpages = document.querySelectorAll("div section");
+const installPromptBtn = document.getElementById("installPrompt");
 /*for hamMenu */
 const hamBtn=document.querySelector("#hamMenu");
 const menuItemsList=document.querySelector("nav ul");
@@ -38,6 +39,31 @@ var previousWidth2 = 1;
 ResizeFalcMap();
 resizeGameBG();
 pigeonGameBtns[0].style.display = "none";
+var installPromptEvent;
+window.addEventListener('beforeinstallprompt', function(e) {
+    // Prevents the default mini-infobar or install dialog from appearing on mobile
+    e.preventDefault();
+    installPromptEvent = e;
+    if (window.matchMedia("(max-width: 800px)").matches){
+        installPromptBtn.style.visibility = "visible";
+    }
+});
+installPromptBtn.addEventListener('click', function() {
+    // Update the install UI to remove the install button
+    installPromptBtn.style.display = "none";
+    // Show the modal add to home screen dialog
+    installPromptEvent.prompt();
+    // Wait for the user to respond to the prompt
+    installPromptEvent.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      // Clear the saved prompt since it can't be used again
+      installPromptEvent = null;
+    });
+  });
 
 window.addEventListener("scroll", function() {
     //if user scrolled down a certain amount, show the BackToTopBtn

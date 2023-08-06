@@ -32,6 +32,13 @@ nav ul li:hover{
     text-transform: uppercase;
     color:rgb(213, 188, 85);
 }
+#installPrompt{
+    visibility: hidden;
+    position: fixed;
+    width:100%;
+    height: 20%;
+    bottom: 0;
+}
 #BackToTop{
     /* page starts at the top, so hide btn */
     display: none;
@@ -322,6 +329,9 @@ button:active{
     }
     nav div ul li{
         display:block;
+    }
+    .showInstallPrompt{
+        visibility: visible;
     }
     #hamMenu{
         z-index: 3; /*show above the rest of the nav*/
