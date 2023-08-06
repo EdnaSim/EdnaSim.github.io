@@ -31,7 +31,7 @@ if (window.matchMedia("(max-width: 800px)").matches){
 hidepages(pigeonInfo);
 hidepages(falcInfo);
 hidepages(allpages);
-showpage(allpages, 3); //start page
+showpage(allpages, 2); //start page
 speedgraph.style.display = "none";
 //previous widths for the 2 image maps (pigeon, falc)
 var previousWidth1 = 1; //start at 1 for the first call (x * 1 = x)
@@ -199,6 +199,25 @@ function hideForm(){
         p.innerHTML = "<b>Close guess! It's actually slower!</b>";
     }
 }
+//restart falcon bar anim
+function RestartAnim(){ 
+    document.getElementById("speedGuessForm").style.display = "inline";
+    //text back to original
+    document.querySelector("#speedGraph div p").innerHTML="<b>Let's see...</b>"
+    speedgraph.style.display = "none";
+    //cloning method adapted from: https://stackoverflow.com/questions/58170892/javascript-add-remove-animation-class-only-animates-once
+    // let bars = document.querySelectorAll(".bar div");
+    // for (let b of bars){
+    //     //for each bar, clone it
+    //     let newb = b.cloneNode(true);
+    //     //if alr have, toggle off, so that when toggled again, anim immediately plays
+    //     if (newb.classList.contains("barAnim"))
+    //         newb.classList.toggle("barAnim");
+    //     newb.classList.toggle("barAnim");
+    //     //replace the old one, which resets the animation
+    //     b.replaceWith(newb);
+    // }
+}
 
 function backtotop(){
     window.scrollTo(0,0);
@@ -277,22 +296,6 @@ function toggleMenus(){ /*open and close ham menu*/
     menuItemsList.classList.toggle("toggleCloseDisplay");
     menuItemsList.classList.toggle("toggleDisplay");
     hamBtn.classList.toggle("hamMenuSpanAnim");
-}
-function RestartAnim(){ 
-    document.getElementById("speedGuessForm").style.display = "inline";
-    speedgraph.style.display = "none";
-    //cloning method adapted from: https://stackoverflow.com/questions/58170892/javascript-add-remove-animation-class-only-animates-once
-    // let bars = document.querySelectorAll(".bar div");
-    // for (let b of bars){
-    //     //for each bar, clone it
-    //     let newb = b.cloneNode(true);
-    //     //if alr have, toggle off, so that when toggled again, anim immediately plays
-    //     if (newb.classList.contains("barAnim"))
-    //         newb.classList.toggle("barAnim");
-    //     newb.classList.toggle("barAnim");
-    //     //replace the old one, which resets the animation
-    //     b.replaceWith(newb);
-    // }
 }
 
 function playAudio(id){
@@ -455,7 +458,6 @@ function spawnRandomObject() {
         dx = -1;
         dy = 0;
     }
-
     // create the new object
     var object = {
         // set this objects type
@@ -483,6 +485,8 @@ function stopPigeonGame(){
     clearInterval(gameAnimateID);
     //clear canvas context
     ctx.clearRect(0, 0, gamebg.width, gamebg.height);
+    //remove all objects
+    objects.splice(0, objects.length);
     //display other button to Start game
     pigeonGameBtns[0].style.display = "none";
     pigeonGameBtns[1].style.display = "inline";
@@ -495,7 +499,7 @@ function stopPigeonGame(){
 }
 function startPigeonGame(){
     //start continuous animate calls
-    gameAnimateID = setInterval(animate, 1);
+    gameAnimateID = setInterval(animate, 10);
     //display the Stop button instead
     pigeonGameBtns[0].style.display = "inline";
     pigeonGameBtns[1].style.display = "none";

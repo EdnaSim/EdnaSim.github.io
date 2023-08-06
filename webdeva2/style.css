@@ -129,6 +129,15 @@ button.tooltip:focus .tooltip_Text{
     margin: auto;
     /* top row for info display, bottom for game */
 }
+#pigeonDiag{
+    /* keep the text side-by-side with the img */
+    display: flex;
+}
+.pigeoninfo{
+    text-align:left;
+    flex: auto;
+    padding-left: 1em;
+}
 td{
     text-align: center;
     padding: 0.5em;
@@ -151,35 +160,39 @@ td{
     /* background-color: coral; */
     position: relative;
 }
-.FalcLeft{
-    animation: slideLeft 0.5s forwards;
+.FalcLeft, .FalcRight{
     position: absolute;
+    text-align: justify;
     background-color: rgb(199, 172, 105);
     z-index: -1;
-    left: 100%;
-    width: 100%;
+    padding: 1%;
+    width: 98%;
     border: 1px solid black;
     border-radius: 10px 10px 10px 10px;
-    grid-column: 1/2;
     grid-row: 1; /* make them overlap, since they will be appearing one at a time anyway */
+}
+/* easier to see with differences separate here */
+.FalcLeft{
+    animation: slideLeft 0.5s forwards;
+    left: 100%;
+    grid-column: 1/2;
 }
 .FalcRight{
     animation: slideRight 0.5s forwards;
-    position: absolute;
-    background-color: rgb(199, 172, 105);
-    z-index: -1;
-    width: 100%;
     right:100%;
-    border: 1px solid black;
-    border-radius: 10px 10px 10px 10px;
     grid-column: 3/4;
-    grid-row: 1;
 }
 @keyframes slideLeft {
-    100% { left: 0; }
+    /* looks weird if immediately jumps to 1 so keep it -1 till the end */
+    95%{z-index: -1;}
+    /* content might overlap, so make it 1 */
+    100% { left: 0; z-index: 1;}
 }
 @keyframes slideRight {
-    100% { right: 0; }
+    /* looks weird if immediately jumps to 1 so keep it -1 till the end */
+    95%{z-index: -1;}
+    /* content might overlap, so make it 1 */
+    100% { right: 0; z-index: 1;}
 }
 #FalcDiagram div{
     grid-column: 2/3;
@@ -308,12 +321,11 @@ button:active{
 /* Referenced from: https://codepen.io/erikterwan/pen/EVzeRP?editors=1100 */
 .toggleDisplay{
     transform: translate(0%);
-    /*cubic bezier: variable speed (start, ?, end, ?)*/
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform 0.5s ease-in;
 }
 .toggleCloseDisplay{
     transform: translate(-100%); /*move offscreen*/
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform 0.5s ease-in-out;
 }
 .togglehide{
     display: none;
@@ -415,16 +427,18 @@ button:active{
     }
     #pigeonDiag{
         /* container */
+        display: inline-block; /*remove flex*/
         text-align: center;
         vertical-align: top;
         position: relative;
     }
     .pigeoninfo{
+        padding: 1%;
         margin-top: 0.5em;
         background-color: rgb(199, 172, 105);
         border: 1px solid black;
         border-radius: 10px 10px 10px 10px;
-        width: 100%;
+        width: 98%;
     }
     #FalcDiagram{
         display: block;
